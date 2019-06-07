@@ -3,16 +3,18 @@ import axios from 'axios'
 import Comment from "./Comment";
 import {SERVER_URL} from "../config";
 
-export default ({user}) => {
+export default ({user, userComments}) => {
     const {id, name, email, imageUrl} = user;
-    const [comments, setComments] = useState([]);
-    useEffect(() => {
-        const fetchComments = async () => {
-            const comments = await axios.get(`${SERVER_URL}/users/${id}/comments`);
-            setComments(comments);
-        };
-        fetchComments();
-    }, [id]);
+    const [comments, setComments] = useState(userComments);
+    if (userComments === null) {
+        useEffect(() => {
+            const fetchComments = async () => {
+                const comments = await axios.get(`${SERVER_URL}/users/${id}/comments`);
+                setComments(comments);
+            };
+            fetchComments();
+        }, [id]);
+    }
     return (
         <div className="container-fluid">
             <div className="row">

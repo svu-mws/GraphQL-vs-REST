@@ -15,6 +15,6 @@ export default () =>
             sizeUnit={"px"}
             size={150}
             color={'#123abc'}
-            loading={this.state.loading}
+            loading={true}
         />
     </div>
