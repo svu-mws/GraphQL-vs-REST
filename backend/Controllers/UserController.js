@@ -43,6 +43,16 @@ router.get('/:id', function (req, res) {
         res.status(200).send(user);
     });
 });
+
+router.get('/:id/comments', function (req, res) {
+    console.log(req.params);
+    Comment.find({userId: req.params.id}, function (err, comments) {
+        if (err) return res.status(500).send(`There was a problem finding the user.\n${err}`);
+        if (!comments) return res.status(404).send("User not found.");
+        res.status(200).send(comments);
+    });
+});
+
 module.exports = router;
 
 

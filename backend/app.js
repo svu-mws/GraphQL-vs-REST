@@ -25,10 +25,6 @@ mongoose
 const UserController = require('./Controllers/UserController');
 app.use('users', UserController);
 
-const CommentController = require('./Controllers/CommentController');
-app.use('comments', CommentController);
-
-
 //GraphQL
 app.use(
     "/graphql",
