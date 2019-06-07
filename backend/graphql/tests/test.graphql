@@ -1,0 +1,14 @@
+{
+    users {
+        id,
+        name,
+        imageUrl,
+        comments {
+            text,
+            user {
+                name,
+                imageUrl
+            }
+        }
+    }
+}
