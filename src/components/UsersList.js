@@ -2,14 +2,12 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios'
 import User from "./User";
 import {SERVER_URL} from '../config'
-import {useQuery} from "urql";
+import request from "graphql-request";
 
 async function fetchUsers(useRest = true) {
     if (useRest)
         return await axios.get(`${SERVER_URL}/users`);
-    return await useQuery({
-        query:
-            `
+    const query = `{
                      users {
                             id,
                             name,
@@ -22,8 +20,11 @@ async function fetchUsers(useRest = true) {
                                 }
                             }
                         }
-                     `,
-    })[0];
+    }`;
+    return await request(
+        `${SERVER_URL}/graphql`,
+        query
+    );
 }
 
 export default function UsersList({useRest = true}) {

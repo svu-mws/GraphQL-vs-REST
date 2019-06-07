@@ -1,4 +1,6 @@
-const SERVER_URL = "http://localhost:9000/api";
+import {port} from "backend/server";
+
+const SERVER_URL = `http://localhost:${port}`;
 
 export {
     SERVER_URL

@@ -23,10 +23,10 @@ mongoose
 
 // REST API
 const UserController = require('./Controllers/UserController');
-app.use('api/users', UserController);
+app.use('users', UserController);
 
 const CommentController = require('./Controllers/CommentController');
-app.use('api/comments', CommentController);
+app.use('comments', CommentController);
 
 
 //GraphQL
