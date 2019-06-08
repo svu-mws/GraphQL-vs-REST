@@ -6,7 +6,7 @@ import {SERVER_URL} from "../config";
 export default ({user, userComments}) => {
     const {id, name, email, imageUrl} = user;
     const [comments, setComments] = useState(userComments);
-    if (userComments === null) {
+    if (userComments === undefined) {
         useEffect(() => {
             const fetchComments = async () => {
                 const comments = await axios.get(`${SERVER_URL}/users/${id}/comments`);
