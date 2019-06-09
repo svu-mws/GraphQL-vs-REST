@@ -1,29 +1,16 @@
 const express = require("express");
 const expressGraphQL = require("express-graphql");
-const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const schema = require("./graphql");
+require("./DB_Connection");
 
 
 const app = express();
 
-const uri = "mongodb://127.0.0.1/rest_graphql";
-
-mongoose
-    .connect(
-        uri,
-        {
-            useCreateIndex: true,
-            useNewUrlParser: true
-        }
-    )
-    .then(() => console.log("MongoDB connected"))
-    .catch(err => console.log(err));
-
 // REST API
 const UserController = require('./Controllers/UserController');
-app.use('users', UserController);
+app.use('/users', UserController);
 
 //GraphQL
 app.use(

@@ -24,10 +24,11 @@
     "react-spinners": "^0.5.4"
   },
   "scripts": {
-    "start": "node backend/server.js & react-scripts start",
+    "seed": "md-seed run --dropdb",
+    "server": "node backend/server.js",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "seed": "node backend/seed.js",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -44,5 +45,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "mongoose-data-seed": "^1.0.7"
   }
 }
