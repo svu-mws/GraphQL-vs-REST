@@ -3,6 +3,7 @@ module.exports = `
     id: String!
     name: String!
     email: String!
+    imageUrl: String!
     comments: [Comment]
   }
   type Query {

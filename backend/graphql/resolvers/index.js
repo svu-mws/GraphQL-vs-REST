@@ -57,7 +57,7 @@ module.exports = {
     },
     Comment: {
         async user(comment) {
-            return await User.findById(comment.userId0);
+            return await User.findById(comment.userId);
         }
     },
 };

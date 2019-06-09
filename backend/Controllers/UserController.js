@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
 const User = require('../Models/User');
+const Comment = require('../Models/Comment');
 router.use(bodyParser.urlencoded({extended: true}));
 router.use(bodyParser.json());
 // CREATES A NEW USER
