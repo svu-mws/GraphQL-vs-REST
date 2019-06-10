@@ -17,6 +17,7 @@ export default ({user, userComments = []}) => {
                 .then(comments => setComments(comments));
         }, [_id]);
     }
+    let collapseId = `collapse_${name}`;
     return (
         <div className="container-fluid">
             <div className="row">
@@ -44,12 +45,12 @@ export default ({user, userComments = []}) => {
                         <button className="btn btn-primary"
                                 type="button"
                                 data-toggle="collapse"
-                                data-target="#collapseExample"
+                                data-target={`#${collapseId}`}
                                 aria-expanded="false"
                                 aria-controls="collapseExample">
                             Comments
                         </button>
-                        <div className="collapse" id="collapseExample">
+                        <div className="collapse" id={collapseId}>
                             <div className="card card-body">
                                 {
                                     comments.map((comment, index) =>

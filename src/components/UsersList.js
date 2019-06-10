@@ -6,9 +6,9 @@ import request from "graphql-request";
 
 
 async function fetchUsers(useRest) {
-    if (useRest) {
+    if (useRest)
         return (await axios.get(`${SERVER_URL}/users`)).data;
-    }
+
     const query = `
             {
                      users {
@@ -28,7 +28,7 @@ async function fetchUsers(useRest) {
     return (await request(
         `${SERVER_URL}/graphql`,
         query
-    ));
+    )).users;
 }
 
 export default function UsersList({useRest = false}) {
@@ -42,7 +42,7 @@ export default function UsersList({useRest = false}) {
     return (
         <>
             {
-                users.map(user => <User user={user} userComments={user.comments}/>)
+                users.map((user, index) => <User key={index} user={user} userComments={user.comments}/>)
             }
         </>
     );
