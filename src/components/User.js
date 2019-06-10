@@ -3,17 +3,19 @@ import axios from 'axios'
 import Comment from "./Comment";
 import {SERVER_URL} from "../config";
 
-export default ({user, userComments}) => {
-    const {id, name, email, imageUrl} = user;
+const fetchComments = async (id) => {
+    return (await axios.get(`${SERVER_URL}/users/${id}/comments`)).data;
+};
+
+
+export default ({user, userComments = []}) => {
+    const {_id, name, email, imageUrl} = user;
     const [comments, setComments] = useState(userComments);
-    if (userComments === undefined) {
+    if (userComments.length === 0) {
         useEffect(() => {
-            const fetchComments = async () => {
-                const comments = await axios.get(`${SERVER_URL}/users/${id}/comments`);
-                setComments(comments);
-            };
-            fetchComments();
-        }, [id]);
+            fetchComments(_id)
+                .then(comments => setComments(comments));
+        }, [_id]);
     }
     return (
         <div className="container-fluid">
@@ -47,11 +49,13 @@ export default ({user, userComments}) => {
                                 aria-controls="collapseExample">
                             Comments
                         </button>
-                        <div className="collapse"
-                             id="collapseExample">
+                        <div className="collapse" id="collapseExample">
                             <div className="card card-body">
                                 {
-                                    comments.map(comment => <Comment user={user} comment={comment}/>)
+                                    comments.map((comment, index) =>
+                                        <Comment
+                                            key={index} user={user}
+                                            comment={comment}/>)
                                 }
                             </div>
                         </div>

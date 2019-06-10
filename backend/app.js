@@ -10,11 +10,15 @@ const app = express();
 
 // REST API
 const UserController = require('./Controllers/UserController');
-app.use('/users', UserController);
+app.use(
+    '/api/users',
+    cors(),
+    bodyParser.json(),
+    UserController);
 
 //GraphQL
 app.use(
-    "/graphql",
+    "/api/graphql",
     cors(),
     bodyParser.json(),
     expressGraphQL({

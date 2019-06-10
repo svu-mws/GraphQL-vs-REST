@@ -1,13 +1,16 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import axios from 'axios'
 import User from "./User";
 import {SERVER_URL} from '../config'
 import request from "graphql-request";
 
-async function fetchUsers(useRest = true) {
-    if (useRest)
-        return await axios.get(`${SERVER_URL}/users`);
-    const query = `{
+
+async function fetchUsers(useRest) {
+    if (useRest) {
+        return (await axios.get(`${SERVER_URL}/users`)).data;
+    }
+    const query = `
+            {
                      users {
                             id,
                             name,
@@ -20,18 +23,22 @@ async function fetchUsers(useRest = true) {
                                 }
                             }
                         }
-    }`;
-    return await request(
+            }`
+    ;
+    return (await request(
         `${SERVER_URL}/graphql`,
         query
-    );
+    ));
 }
 
-export default function UsersList({useRest = true}) {
+export default function UsersList({useRest = false}) {
     const [users, setUsers] = useState([]);
     useEffect(() => {
-        setUsers(fetchUsers(useRest));
-    }, [useRest, users]);
+        const temp = fetchUsers(useRest);
+        // console.log(temp);
+        temp.then(users => setUsers(users));
+
+    }, [useRest]);
     return (
         <>
             {
