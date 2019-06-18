@@ -14,7 +14,7 @@ export default ({user, userComments = []}) => {
     if (userComments.length === 0) {
         useEffect(() => {
             fetchComments(_id)
-                .then(comments => setComments(comments));
+                .then(setComments);
         }, [_id]);
     }
     return (
