@@ -17,47 +17,52 @@ export default ({user, userComments = []}) => {
                 .then(comments => setComments(comments));
         }, [_id]);
     }
-    let collapseId = `collapse_${name}`;
     return (
-        <div className="container-fluid">
-            <div className="row">
-                <div className="col-12">
-                    <div className="card card-inverse" style={
-                        {
-                            backgroundColor: "#333",
-                            borderColor: "#333"
-                        }
-                    }>
-                        <div className="card-block">
-                            <div className="row">
-                                <div className="col-md-8 col-sm-8">
-                                    <h2 className="card-title">Name: {name}</h2>
-                                    <p className="card-text"><strong>Email: </strong> {email}</p>
-                                </div>
-                                <div className="col-md-4 col-sm-4 text-center">
-                                    <img className="btn-md"
-                                         src={imageUrl}
-                                         alt={name}
-                                         style={{borderRadius: "50%"}}/>
-                                </div>
+        <div className="col-xs-12 col-sm-6 col-md-4">
+            <div className="image-flip" onTouchStart="this.classList.toggle('hover');">
+                <div className="mainflip">
+                    <div className="frontside">
+                        <div className="card">
+                            <div className="card-body text-center">
+                                <p>
+                                    <img
+                                        className=" img-fluid"
+                                        src={imageUrl}
+                                        alt={name}
+                                        title={name}
+                                    />
+                                </p>
+                                <h4 className="card-title">
+                                    {name}
+                                </h4>
+                                <p className="card-text">
+                                    {email}
+                                </p>
+                                <a href="#" className="btn btn-primary btn-sm">
+                                    <i className="fa fa-plus">
+                                    </i>
+                                </a>
                             </div>
                         </div>
-                        <button className="btn btn-primary"
-                                type="button"
-                                data-toggle="collapse"
-                                data-target={`#${collapseId}`}
-                                aria-expanded="false"
-                                aria-controls="collapseExample">
-                            Comments
-                        </button>
-                        <div className="collapse" id={collapseId}>
-                            <div className="card card-body">
-                                {
-                                    comments.map((comment, index) =>
-                                        <Comment
-                                            key={index} user={user}
-                                            comment={comment}/>)
-                                }
+                    </div>
+                    <div className="backside">
+                        <div className="card">
+                            <div className="card-body text-center mt-4">
+                                <h4 className="card-title" style={{marginTop: -25}}>
+                                    <u>
+                                        Comments
+                                    </u>
+                                </h4>
+                                <p className="card-text">
+                                    {
+                                        comments.map((comment, index) =>
+                                            <Comment
+                                                key={index}
+                                                user={user}
+                                                comment={comment}/>
+                                        )
+                                    }
+                                </p>
                             </div>
                         </div>
                     </div>

@@ -14,6 +14,7 @@ async function fetchUsers(useRest) {
                      users {
                             id,
                             name,
+                            email,
                             imageUrl,
                             comments {
                                 text,
@@ -31,19 +32,24 @@ async function fetchUsers(useRest) {
     )).users;
 }
 
-export default function UsersList({useRest = false}) {
+export default function UsersList({useRest = true}) {
     const [users, setUsers] = useState([]);
     useEffect(() => {
         const temp = fetchUsers(useRest);
-        // console.log(temp);
         temp.then(users => setUsers(users));
 
     }, [useRest]);
     return (
-        <>
-            {
-                users.map((user, index) => <User key={index} user={user} userComments={user.comments}/>)
-            }
-        </>
+        <div className="container">
+            <h5 className="section-title h1">
+                Users
+            </h5>
+            <br/>
+            <div className="row">
+                {
+                    users.map((user, index) => <User key={index} user={user} userComments={user.comments}/>)
+                }
+            </div>
+        </div>
     );
 }

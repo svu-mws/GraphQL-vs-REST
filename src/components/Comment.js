@@ -4,17 +4,17 @@ export default ({user, comment}) => {
     const {name: userName, imageUrl} = user;
     const {text} = comment;
     return (
-        <div className="row">
-            <div className="col-md-2">
+        <div className="row" style={{marginTop: 10}}>
+            <div className="col-md-4">
                 <img
                     alt={userName}
                     title={userName}
                     src={imageUrl}
-                    className="img img-rounded img-fluid"/>
+                    className="img img-rounded img-fluid img-thumbnail comment-image"/>
             </div>
-            <div className="col-md-10">
+            <div className="col-md-8">
                 <p>
-                    <a className="float-left" href="https://maniruzzaman-akash.blogspot.com/p/contact.html">
+                    <a className="float-left" href="#">
                         <strong>
                             {userName}
                         </strong>

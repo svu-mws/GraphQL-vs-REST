@@ -4,31 +4,31 @@ const Comment = require("../backend/Models/Comment");
 
 const comments = [
     {
-        text: "First First Comment"
+        text: "Kinda good"
     },
     {
-        text: "First Second Comment"
+        text: "Terrible"
     },
     {
-        text: "First Third Comment"
+        text: "Wonderful"
     },
     {
-        text: "Second First Comment"
+        text: "Perfect"
     },
     {
-        text: "Second Second Comment"
+        text: "Extremely good"
     },
     {
-        text: "Second Third Comment"
+        text: "Wow!"
     },
     {
-        text: "Third First Comment"
+        text: "Very bad"
     },
     {
-        text: "Third Second Comment"
+        text: "Awful"
     },
     {
-        text: "Third Third Comment"
+        text: "Nah"
     },
 ];
 
@@ -38,21 +38,18 @@ class CommentsSeeder extends Seeder {
     }
 
     async shouldRun() {
-        return User.countDocuments()
+        return User
+            .countDocuments()
             .exec()
             .then(count => count !== 0);
     }
 
     async run() {
-        let commentsData = comments;
-        let slope = this.users.length / commentsData.length;
-        for (const [index, comment] of commentsData.entries()) {
-            let userIndex = Math.floor(slope * index);
+        for (const [index, comment] of comments.entries()) {
+            const userIndex = Math.floor(index / this.users.length);
             comment.userId = this.users[userIndex]._id;
         }
-
-        return Comment.create(commentsData);
-
+        return Comment.create(comments);
     }
 }
 
