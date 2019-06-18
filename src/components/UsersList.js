@@ -35,8 +35,8 @@ async function fetchUsers(useRest) {
 export default function UsersList({useRest = true}) {
     const [users, setUsers] = useState([]);
     useEffect(() => {
-        const temp = fetchUsers(useRest);
-        temp.then(users => setUsers(users));
+        fetchUsers(useRest)
+            .then(setUsers);
 
     }, [useRest]);
     return (
